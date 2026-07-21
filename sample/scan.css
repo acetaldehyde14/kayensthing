@@ -1,0 +1,50 @@
+/* iPad Pro 11" - 1 */
+
+position: relative;
+width: 834px;
+height: 1194px;
+
+background: #FBF3EF;
+
+
+/* Scan your handwriting! */
+
+position: absolute;
+width: 599px;
+height: 57px;
+left: 117px;
+top: 248px;
+
+font-family: 'Pixelify Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 48px;
+line-height: 58px;
+text-align: center;
+
+color: #000000;
+
+border: 4px solid #FFFFFF;
+
+
+/* Rectangle 15 */
+
+position: absolute;
+width: 599px;
+height: 612px;
+left: 117px;
+top: 333px;
+
+background: url(copy_F77BCF03-4552-4CA2-AAD4-45CAF5C32CD7.png);
+border-radius: 30px;
+
+
+/* Rectangle 16 */
+
+position: absolute;
+width: 252px;
+height: 128px;
+left: 464px;
+top: 966px;
+
+background: #FBF3EF;

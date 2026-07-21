@@ -1,0 +1,142 @@
+/* Component 1 */
+
+box-sizing: border-box;
+
+position: relative;
+width: 400.64px;
+height: 111.29px;
+
+border: 0.794921px dashed #9747FF;
+border-radius: 3.9746px;
+
+
+/* Property 1=Frame 3 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: 15.9px;
+top: 15.9px;
+
+
+
+/* 2 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: 0px;
+top: 0px;
+
+
+
+/* 3 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: 0px;
+top: 0px;
+
+background: conic-gradient(from 180deg at 50% 50%, #FF4D00 0deg, #FF4D00 63.24deg, rgba(255, 255, 255, 0) 360deg);
+
+
+/* Ellipse 1 */
+
+position: absolute;
+width: 11.92px;
+height: 11.92px;
+left: 34.18px;
+top: 67.57px;
+
+background: #FF4D00;
+
+
+/* Property 1=Frame 4 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: 160.39px;
+top: 15.9px;
+
+
+
+/* 2 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: -11.62px;
+top: -11.62px;
+
+transform: rotate(-111.04deg);
+
+
+/* 3 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: -11.62px;
+top: -11.62px;
+
+background: conic-gradient(from 180deg at 50% 50%, #FF4D00 0deg, #FF4D00 63.24deg, rgba(255, 255, 255, 0) 360deg);
+transform: rotate(-111.04deg);
+
+
+/* Ellipse 1 */
+
+position: absolute;
+width: 11.92px;
+height: 11.92px;
+left: 63.43px;
+top: 19.54px;
+
+background: #FF4D00;
+transform: rotate(-111.04deg);
+
+
+/* Property 1=Frame 5 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: 304.88px;
+top: 15.9px;
+
+
+
+/* 2 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: -13.62px;
+top: -13.62px;
+
+transform: rotate(116.7deg);
+
+
+/* 3 */
+
+position: absolute;
+width: 79.49px;
+height: 79.49px;
+left: -13.62px;
+top: -13.62px;
+
+background: conic-gradient(from 180deg at 50% 50%, #FF4D00 0deg, #FF4D00 63.24deg, rgba(255, 255, 255, 0) 360deg);
+transform: rotate(116.7deg);
+
+
+/* Ellipse 1 */
+
+position: absolute;
+width: 11.92px;
+height: 11.92px;
+left: 1.38px;
+top: 16.92px;
+
+background: #FF4D00;
+transform: rotate(116.7deg);
