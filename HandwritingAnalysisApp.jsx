@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
-// Point this at the Flask backend in backend/app.py (see backend/.env.example).
-const API_BASE_URL = "http://localhost:5001";
+// Analysis is a Netlify Function (netlify/functions/analyze.mjs), routed to
+// /api/analyze -- same-origin in both `netlify dev` and prod, so no host needed.
+const API_BASE_URL = "";
 
 // Design tokens pulled from the Figma file (ILAB (Copy) (Copy), fileKey l600l8ZhKnpdxZMfk6GYc2).
 // Cards/bars/tags use one fixed palette across every personality -- only the
