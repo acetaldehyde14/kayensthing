@@ -126,11 +126,14 @@ export default function HandwritingAnalysisApp() {
   const [capturedPhoto, setCapturedPhoto] = useState(null);
   const [analysisError, setAnalysisError] = useState("");
   const [liveAnalysis, setLiveAnalysis] = useState(null); // { traitValues, ocrText } from the backend
+  const [resultScale, setResultScale] = useState(1);
+  const [resultFill, setResultFill] = useState(false); // whether to scale-to-fit (tablet/desktop) vs. natural scroll (phone)
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
   const timerRef = useRef(null);
   const fileInputRef = useRef(null);
+  const resultContentRef = useRef(null);
 
   const cameraSupported =
     typeof navigator !== "undefined" && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
@@ -139,6 +142,32 @@ export default function HandwritingAnalysisApp() {
     clearTimeout(timerRef.current);
     if (streamRef.current) streamRef.current.getTracks().forEach((t) => t.stop());
   }, []);
+
+  useEffect(() => {
+    if (screen !== "result") return;
+    const el = resultContentRef.current;
+    if (!el) return;
+    const recalc = () => {
+      const fill = window.innerWidth >= 700;
+      setResultFill(fill);
+      if (!fill) {
+        setResultScale(1);
+        return;
+      }
+      const naturalWidth = el.scrollWidth;
+      const naturalHeight = el.scrollHeight;
+      if (!naturalWidth || !naturalHeight) return;
+      setResultScale(Math.min(window.innerWidth / naturalWidth, window.innerHeight / naturalHeight));
+    };
+    recalc();
+    const ro = new ResizeObserver(recalc);
+    ro.observe(el);
+    window.addEventListener("resize", recalc);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", recalc);
+    };
+  }, [screen, resultIdx]);
 
   const openCamera = () => {
     if (!cameraSupported) {
@@ -242,13 +271,15 @@ export default function HandwritingAnalysisApp() {
   return (
     <div
       style={{
-        minHeight: "100vh",
+        height: "100vh",
         width: "100%",
         boxSizing: "border-box",
         fontFamily: FONT_BODY,
         background: screenBg,
         display: "flex",
         flexDirection: "column",
+        overflowY: "auto",
+        overflowX: "hidden",
       }}
     >
       <style>{`
@@ -281,6 +312,7 @@ export default function HandwritingAnalysisApp() {
         }
       `}</style>
 
+      {screen !== "result" && (
       <div
         style={{
           width: "100%",
@@ -389,9 +421,34 @@ export default function HandwritingAnalysisApp() {
             <div className="hw-spinner" />
           </div>
         )}
+      </div>
+      )}
 
-        {screen === "result" && (
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "22px 20px 26px", gap: 14 }}>
+      {screen === "result" && (
+        <div
+          style={{
+            flex: 1,
+            width: "100%",
+            minHeight: 0,
+            minWidth: 0,
+            display: "flex",
+            alignItems: resultFill ? "center" : "flex-start",
+            justifyContent: "center",
+            overflow: resultFill ? "hidden" : "visible",
+          }}
+        >
+          <div
+            ref={resultContentRef}
+            style={{
+              width: 430,
+              transform: `scale(${resultScale})`,
+              transformOrigin: "center center",
+              display: "flex",
+              flexDirection: "column",
+              padding: "22px 20px 26px",
+              gap: 14,
+            }}
+          >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 14 }}>
               <div>
                 <div style={{ fontFamily: FONT_BODY, fontWeight: 700, fontSize: 16, color: TEXT_DARK, opacity: 0.75 }}>You are...</div>
@@ -520,8 +577,8 @@ export default function HandwritingAnalysisApp() {
               Try Again
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
