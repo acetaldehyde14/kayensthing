@@ -243,30 +243,50 @@ export default function HandwritingAnalysisApp() {
     <div
       style={{
         minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 24,
+        width: "100%",
         boxSizing: "border-box",
         fontFamily: FONT_BODY,
-        background: "#EDE6DC",
+        background: screenBg,
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;600;700&family=Anonymous+Pro:wght@400;700&display=swap');
         @keyframes hw-spin { to { transform: rotate(360deg); } }
+        .hw-spinner {
+          position: relative;
+          width: 80px;
+          height: 80px;
+          animation: hw-spin 0.9s linear infinite;
+        }
+        .hw-spinner::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background: conic-gradient(from 0deg, #FF4D00 0deg, #FF4D00 64deg, rgba(255, 77, 0, 0) 360deg);
+          -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 14px));
+          mask: radial-gradient(farthest-side, transparent calc(100% - 14px), #000 calc(100% - 14px));
+        }
+        .hw-spinner::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 33px;
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: #FF4D00;
+        }
       `}</style>
 
       <div
         style={{
           width: "100%",
-          maxWidth: 430,
-          minHeight: 760,
-          background: screenBg,
-          borderRadius: 28,
-          overflow: "hidden",
-          boxShadow: "0 20px 60px rgba(60,40,20,0.18)",
-          position: "relative",
+          maxWidth: 600,
+          margin: "0 auto",
+          flex: 1,
           display: "flex",
           flexDirection: "column",
         }}
@@ -366,7 +386,7 @@ export default function HandwritingAnalysisApp() {
         {screen === "loading" && (
           <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24 }}>
             <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 24, color: TEXT_DARK }}>Loading...</div>
-            <div style={{ width: 76, height: 76, borderRadius: "50%", border: "8px solid #FBDDB8", borderTopColor: ACCENT, animation: "hw-spin 0.9s linear infinite" }} />
+            <div className="hw-spinner" />
           </div>
         )}
 
@@ -403,7 +423,7 @@ export default function HandwritingAnalysisApp() {
                 }}
               >
                 <img
-                  src={`images/${p.id}/personality.png`}
+                  src={`/images/${p.id}/personality.png`}
                   alt={`${p.name} mascot`}
                   style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 />
@@ -477,7 +497,7 @@ export default function HandwritingAnalysisApp() {
               <div style={{ background: CARD_BG, borderRadius: 12, padding: 10, display: "flex", gap: 10, alignItems: "center", justifyContent: "center" }}>
                 {besties.map((b) => (
                   <div key={b.id} style={{ width: 52, height: 52, borderRadius: "50%", overflow: "hidden", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
-                    <img src={`images/${b.id}/personality.png`} alt={`${b.name} mascot`} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    <img src={`/images/${b.id}/personality.png`} alt={`${b.name} mascot`} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                   </div>
                 ))}
               </div>
